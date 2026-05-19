@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amanda SPA – Repuestos e Insumos de Minería</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #f5c211;
+      --yellow-dark: #d4a800;
+      --dark: #1c1c1c;
+      --dark2: #2a2a2a;
+      --gray: #555;
+      --light-gray: #f4f4f4;
+      --white: #fff;
+      --font-heading: 'Montserrat', sans-serif;
+      --font-body: 'Roboto', sans-serif;
+    }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--dark);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; height: auto; display: block; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ---- TOP BAR ---- */
+    .top-bar {
+      background: var(--dark);
+      color: #aaa;
+      font-size: 13px;
+      padding: 8px 0;
+    }
+    .top-bar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .top-bar-left { display: flex; gap: 24px; flex-wrap: wrap; }
+    .top-bar-left span { display: flex; align-items: center; gap: 6px; }
+    .top-bar-left span strong { color: var(--yellow); }
+    .top-bar-right { display: flex; gap: 12px; }
+    .top-bar-right a { color: #aaa; transition: color .2s; }
+    .top-bar-right a:hover { color: var(--yellow); }
+
+    /* ---- HEADER ---- */
+    .site-header {
+      background: var(--white);
+      box-shadow: 0 2px 10px rgba(0,0,0,.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 20px;
+    }
+    .logo img { height: 60px; width: auto; }
+    .main-nav { display: flex; align-items: center; gap: 4px; position: relative; }
+    .main-nav a {
+      padding: 10px 14px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--dark);
+      border-radius: 3px;
+      transition: color .2s, background .2s;
+      position: relative;
+    }
+    .main-nav a:hover { color: var(--yellow); }
+    .main-nav a.active { color: var(--yellow); }
+    .hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      color: var(--dark);
+    }
+
+    /* ---- HERO ---- */
+    .hero {
+      position: relative;
+      min-height: 520px;
+      background: url('img/background-half-face-hero.jpg') center center / cover no-repeat;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.15) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      padding: 60px 0;
+    }
+    .hero-quote {
+      font-family: var(--font-heading);
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 800;
+      color: var(--yellow);
+      line-height: 1.2;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+    .hero-quote::before { content: '\201C'; }
+    .hero-quote::after { content: '\201D'; }
+    .hero-author {
+      color: rgba(255,255,255,.75);
+      font-size: 13px;
+      font-family: var(--font-heading);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .hero-author strong { color: var(--white); display: block; margin-bottom: 2px; }
+
+    /* ---- CTA BANNER ---- */
+    .cta-banner {
+      background: var(--yellow);
+      padding: 18px 0;
+    }
+    .cta-banner .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .cta-banner-text {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--dark);
+    }
+    .btn {
+      display: inline-block;
+      padding: 12px 30px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 3px;
+      transition: all .25s;
+      cursor: pointer;
+    }
+    .btn-dark {
+      background: var(--dark);
+      color: var(--white);
+      border: 2px solid var(--dark);
+    }
+    .btn-dark:hover { background: var(--dark2); border-color: var(--dark2); }
+    .btn-yellow {
+      background: var(--yellow);
+      color: var(--dark);
+      border: 2px solid var(--yellow);
+    }
+    .btn-yellow:hover { background: var(--yellow-dark); border-color: var(--yellow-dark); }
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--dark);
+      border: 2px solid var(--dark);
+    }
+    .btn-outline-dark:hover { background: var(--dark); color: var(--white); }
+
+    /* ---- SERVICES CARDS ---- */
+    .services-cards {
+      background: var(--light-gray);
+      padding: 60px 0;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .card {
+      background: var(--white);
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 10px 35px rgba(0,0,0,.14); }
+    .card-img { position: relative; overflow: hidden; height: 220px; }
+    .card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s; }
+    .card:hover .card-img img { transform: scale(1.07); }
+    .card-body { padding: 28px 24px; }
+    .card-title {
+      font-family: var(--font-heading);
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--dark);
+    }
+    .card-title::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 3px;
+      background: var(--yellow);
+      margin-top: 10px;
+    }
+    .card-text { color: var(--gray); font-size: 14px; line-height: 1.7; }
+
+    /* ---- ABOUT / GESTIÓN ---- */
+    .section { padding: 80px 0; }
+    .section-title {
+      font-family: var(--font-heading);
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 16px;
+      position: relative;
+    }
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: var(--yellow);
+      margin-top: 14px;
+    }
+    .section-title.center { text-align: center; }
+    .section-title.center::after { margin: 14px auto 0; }
+    .section-subtitle {
+      color: var(--gray);
+      font-size: 15px;
+      max-width: 650px;
+      margin-bottom: 50px;
+      line-height: 1.8;
+    }
+    .section-subtitle.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .two-col.reverse { direction: rtl; }
+    .two-col.reverse > * { direction: ltr; }
+
+    .team-members { display: flex; gap: 30px; margin-top: 30px; }
+    .team-member { display: flex; align-items: center; gap: 14px; }
+    .team-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--yellow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--dark);
+      flex-shrink: 0;
+      border: 3px solid var(--yellow);
+    }
+    .team-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--dark);
+    }
+    .team-role { font-size: 12px; color: var(--gray); }
+
+    /* ---- DARK SECTION ---- */
+    .dark-section {
+      background: var(--dark);
+      color: var(--white);
+      padding: 80px 0;
+    }
+    .dark-section .section-title { color: var(--white); }
+    .dark-section .section-subtitle { color: rgba(255,255,255,.65); }
+
+    .dark-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .dark-text p {
+      color: rgba(255,255,255,.75);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .video-thumb {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .video-thumb-item {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .video-thumb-item img { width: 100%; height: 160px; object-fit: cover; }
+    .video-play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,.35);
+      transition: background .2s;
+    }
+    .video-thumb-item:hover .video-play-btn { background: rgba(245,194,17,.5); }
+    .video-play-btn i { font-size: 36px; color: var(--white); }
+
+    /* ---- SERVICES GRID ---- */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+    .service-item { text-align: center; padding: 20px 10px; }
+    .service-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--yellow);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      font-size: 28px;
+      color: var(--dark);
+      transition: transform .3s, background .3s;
+    }
+    .service-item:hover .service-icon { transform: scale(1.1) rotate(5deg); background: var(--dark); color: var(--yellow); }
+    .service-name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+      color: var(--dark);
+    }
+
+    /* ---- PROJECTS ---- */
+    .projects-section {
+      background: var(--light-gray);
+      padding: 80px 0;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      margin-top: 50px;
+    }
+    .project-item {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1;
+    }
+    .project-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+    }
+    .project-item:hover img { transform: scale(1.1); }
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(245,194,17,.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .3s;
+    }
+    .project-item:hover .project-overlay { opacity: 1; }
+    .project-overlay i { font-size: 32px; color: var(--dark); }
+
+    /* ---- TESTIMONIALS ---- */
+    .testimonials-section { padding: 80px 0; }
+    .testimonials-slider { position: relative; overflow: hidden; }
+    .testimonials-track { display: flex; gap: 30px; transition: transform .4s ease; }
+    .testimonial-card {
+      flex: 0 0 calc(50% - 15px);
+      background: var(--light-gray);
+      padding: 34px;
+      border-radius: 6px;
+      border-left: 5px solid var(--yellow);
+    }
+    .testimonial-text {
+      font-style: italic;
+      color: var(--gray);
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .testimonial-author {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--dark);
+    }
+    .testimonial-role { font-size: 12px; color: var(--gray); }
+    .slider-controls { text-align: center; margin-top: 30px; display: flex; gap: 8px; justify-content: center; }
+    .slider-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+      border: none;
+      transition: background .2s;
+    }
+    .slider-dot.active { background: var(--yellow); }
+
+
+    /* ---- CONTACT SECTION ---- */
+    .contact-section {
+      background: var(--dark2);
+      color: var(--white);
+      padding: 80px 0 60px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    .contact-col-title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 22px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--yellow);
+      color: var(--white);
+    }
+    .contact-info-item { display: flex; gap: 14px; margin-bottom: 18px; align-items: flex-start; }
+    .contact-info-item i { color: var(--yellow); font-size: 18px; margin-top: 2px; width: 20px; flex-shrink: 0; }
+    .contact-info-item span { color: rgba(255,255,255,.8); font-size: 14px; line-height: 1.6; }
+    .contact-map-img {
+      width: 100%;
+      opacity: .6;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+    .social-links { display: flex; gap: 12px; margin-top: 14px; }
+    .social-links a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 16px;
+      transition: background .2s, color .2s;
+    }
+    .social-links a:hover { background: var(--yellow); color: var(--dark); }
+
+    /* ---- FOOTER ---- */
+    .site-footer {
+      background: #111;
+      color: rgba(255,255,255,.4);
+      text-align: center;
+      padding: 18px 0;
+      font-size: 13px;
+    }
+
+    /* ---- SCROLL TO TOP ---- */
+    #scrollTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 44px;
+      height: 44px;
+      background: var(--yellow);
+      color: var(--dark);
+      border: none;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,.25);
+      z-index: 999;
+      transition: transform .2s;
+    }
+    #scrollTop:hover { transform: scale(1.1); }
+    #scrollTop.visible { display: flex; }
+
+    /* ---- RESPONSIVE ---- */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .two-col, .dark-two-col { grid-template-columns: 1fr; gap: 30px; }
+      .two-col.reverse { direction: ltr; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .contact-grid { grid-template-columns: 1fr; }
+      .testimonial-card { flex: 0 0 100%; }
+      .main-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--white); flex-direction: column; box-shadow: 0 8px 20px rgba(0,0,0,.1); padding: 10px 0; }
+      .main-nav.open { display: flex; }
+      .main-nav .dropdown .dropdown-menu { position: static; box-shadow: none; border-top: none; border-left: 3px solid var(--yellow); margin-left: 20px; }
+      .hamburger { display: block; }
+      .header-inner { flex-wrap: wrap; position: relative; }
+      .team-members { flex-direction: column; }
+      .hero { min-height: 380px; }
+      .cta-banner .container { flex-direction: column; text-align: center; }
+    }
+    @media (max-width: 480px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .video-thumb { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="top-bar">
+  <div class="container">
+    <div class="top-bar-left">
+      <span><strong>Horario de Atención:</strong> Lun - Sab 8:00 - 18:00</span>
+      <span><i class="fas fa-phone"></i> (+56) 9 9388 9582</span>
+    </div>
+    <div class="top-bar-right">
+      <a href="https://www.facebook.com/Amanda-spa-230782601161274" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/amanda_insumos_mineros/" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      <a href="mailto:mery.rodriguez@amandaspa.cl"><i class="fas fa-envelope"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="#inicio" class="logo">
+        <img src="img/logo-yellow-black.png" alt="Amanda SPA">
+      </a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Menú">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="main-nav" id="mainNav">
+        <a href="#inicio" class="active">Inicio</a>
+        <a href="#contacto">Contáctanos</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="container">
+    <div class="hero-content">
+      <p class="hero-quote">Lo que necesitas, con rapidez, seguridad y los mejores precios.</p>
+      <div class="hero-author">
+        <strong>Jose Luis Rodríguez</strong>
+        Gerente General Amanda
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="container">
+    <p class="cta-banner-text">¿Necesita repuestos o insumos de minería? ¡Nosotros los conseguimos!</p>
+    <a href="#contacto" class="btn btn-dark">Contáctanos</a>
+  </div>
+</div>
+
+<!-- SERVICE CARDS -->
+<section class="services-cards">
+  <div class="container">
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-img">
+          <img src="img/inner_1-1200x640.jpg" alt="Repuestos de vehículos y camiones" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Repuestos de vehículos y camiones</h3>
+          <p class="card-text">Contamos con una amplia red de proveedores que nos permite conseguir los repuestos que necesita para sus vehículos y maquinaria de manera rápida y confiable.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <img src="img/truck6.png" alt="Servicio de Mantenimiento" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Servicio de Mantenimiento</h3>
+          <p class="card-text">Ofrecemos servicios integrales de mantención y reparación para garantizar la operatividad continua de sus equipos e instalaciones industriales.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-img">
+          <img src="img/inner_6-1-1200x640.jpg" alt="Insumos de minería" loading="lazy">
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Insumos de minería</h3>
+          <p class="card-text">Proveemos insumos especializados para la industria minera, asegurando calidad, disponibilidad y tiempos de entrega óptimos para sus operaciones.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUESTRA GESTIÓN -->
+<section class="section">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <h2 class="section-title">Nuestra Gestión</h2>
+        <p class="section-subtitle">Empresas consolidadas en el rubro depositan su confianza en nuestra gestión, acción que nos ha llevado a crecer junto a ellos y expandirnos de forma sólida.</p>
+        <a href="#contacto" class="btn btn-dark">Contáctanos</a>
+        <div class="team-members" style="margin-top:36px;">
+          <div class="team-member">
+            <div class="team-avatar">JR</div>
+            <div>
+              <div class="team-name">Jose Luis Rodríguez</div>
+              <div class="team-role">Gerente General</div>
+            </div>
+          </div>
+          <div class="team-member">
+            <div class="team-avatar">MR</div>
+            <div>
+              <div class="team-name">Mery Rodríguez</div>
+              <div class="team-role">Administración</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img src="img/gerente7.png" alt="Gerente Amanda SPA" style="border-radius:6px; width:100%; object-fit:cover; max-height:500px;" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ¿BUSCA UN SOCIO CONFIABLE? -->
+<section class="dark-section">
+  <div class="container">
+    <div class="dark-two-col">
+      <div class="dark-text">
+        <h2 class="section-title" style="color:#fff;">¿Busca un socio confiable y estable?</h2>
+        <p>Contamos con más de años de experiencia en el mercado industrial y minero, brindando soluciones rápidas y efectivas a nuestros clientes en toda la región.</p>
+        <p>Nuestra red de proveedores nacionales e internacionales nos permite ofrecer los mejores precios del mercado sin sacrificar calidad ni tiempos de entrega.</p>
+        <a href="#contacto" class="btn btn-yellow" style="margin-top:10px;">Contáctanos</a>
+      </div>
+      <div>
+        <div class="video-thumb">
+          <div class="video-thumb-item">
+            <img src="img/promo_video_factory.jpg" alt="Video fábrica" loading="lazy">
+            <div class="video-play-btn"><i class="fas fa-play-circle"></i></div>
+          </div>
+          <div class="video-thumb-item">
+            <img src="img/promo_video_factory_faces.jpg" alt="Video equipo" loading="lazy">
+            <div class="video-play-btn"><i class="fas fa-play-circle"></i></div>
+          </div>
+        </div>
+        <img src="img/inner_large_2.jpg" alt="Instalaciones" style="width:100%; border-radius:4px; margin-top:10px; height:200px; object-fit:cover;" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="section">
+  <div class="container">
+    <h2 class="section-title center">Los servicios de nuestra empresa</h2>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="service-icon"><i class="fas fa-fire"></i></div>
+        <div class="service-name">Equipos y Accesorios de Soldadura</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon"><i class="fas fa-toolbox"></i></div>
+        <div class="service-name">Ferretería y Elementos Menores</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon"><i class="fas fa-lightbulb"></i></div>
+        <div class="service-name">Iluminación e Instrumentos</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon"><i class="fas fa-dolly-flatbed"></i></div>
+        <div class="service-name">Manejo de Carga</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon"><i class="fas fa-truck"></i></div>
+        <div class="service-name">Repuestos Vehículos y Camiones</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon"><i class="fas fa-hard-hat"></i></div>
+        <div class="service-name">Seguridad Industrial y Señaléticas</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon"><i class="fas fa-wrench"></i></div>
+        <div class="service-name">Servicios de Mantención y Reparación</div>
+      </div>
+      <div class="service-item">
+        <div class="service-icon"><i class="fas fa-industry"></i></div>
+        <div class="service-name">Insumos para Minería</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROYECTOS -->
+<section class="projects-section" id="proyectos">
+  <div class="container">
+    <h2 class="section-title center">Nuestros Proyectos</h2>
+    <div class="projects-grid">
+      <div class="project-item">
+        <img src="img/portfolio_09-1280x1280.jpg" alt="Proyecto" loading="lazy">
+        <div class="project-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="project-item">
+        <img src="img/portfolio_08-1280x1280.jpg" alt="Proyecto" loading="lazy">
+        <div class="project-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="project-item">
+        <img src="img/portfolio_06-1280x1280.jpg" alt="Proyecto" loading="lazy">
+        <div class="project-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="project-item">
+        <img src="img/portfolio_05-1280x1280.jpg" alt="Proyecto" loading="lazy">
+        <div class="project-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="project-item">
+        <img src="img/portfolio_04-1280x1280.jpg" alt="Proyecto" loading="lazy">
+        <div class="project-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="project-item">
+        <img src="img/portfolio_03-1280x1280.jpg" alt="Proyecto" loading="lazy">
+        <div class="project-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+      <div class="project-item">
+        <img src="img/portfolio_02-1280x1280.jpg" alt="Proyecto" loading="lazy">
+        <div class="project-overlay"><i class="fas fa-search-plus"></i></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testimonials-section">
+  <div class="container">
+    <h2 class="section-title center">Testimonios sobre nuestros servicios</h2>
+    <p class="section-subtitle center">Lo que dicen nuestros clientes sobre Amanda SPA.</p>
+    <div class="testimonials-slider">
+      <div class="testimonials-track" id="testimonialsTrack">
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Trabajamos con Amanda SPA hace más de tres años proveyendo repuestos para nuestra maestranza. Siempre han cumplido con los plazos y los precios son muy competitivos. Nos han sacado de apuros en más de una ocasión con insumos de difícil acceso."</p>
+          <div class="testimonial-author">Carlos Espinoza</div>
+          <div class="testimonial-role">Jefe de Maestranza – Faena Minera Norte</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Lo que más valoro de Amanda SPA es la rapidez de respuesta. En minería los tiempos son críticos y ellos entienden eso. Conseguimos repuestos que otros proveedores nos demoraban semanas, en cuestión de días."</p>
+          <div class="testimonial-author">Rodrigo Fuentes</div>
+          <div class="testimonial-role">Supervisor de Operaciones – Maestranza Industrial</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Excelente atención y muy buenos precios. Llevamos años comprándoles elementos de seguridad industrial, ferretería y accesorios de soldadura. Son un proveedor confiable y siempre tienen stock o se comprometen a conseguirlo."</p>
+          <div class="testimonial-author">Patricia Morales</div>
+          <div class="testimonial-role">Encargada de Compras – Contratista Minero</div>
+        </div>
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Amanda SPA nos ha apoyado con el abastecimiento de insumos para nuestras operaciones en faena. La comunicación es fluida, los precios justos y el servicio es de primera. Los recomiendo sin dudarlo."</p>
+          <div class="testimonial-author">Miguel Ángel Soto</div>
+          <div class="testimonial-role">Gerente de Mantención – Empresa de Servicios Mineros</div>
+        </div>
+      </div>
+    </div>
+    <div class="slider-controls" id="sliderControls"></div>
+  </div>
+</section>
+
+
+<!-- CONTACTO -->
+<section class="contact-section" id="contacto">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <h4 class="contact-col-title">Oficina Central</h4>
+        <div class="contact-info-item">
+          <i class="fas fa-phone"></i>
+          <span>(+56) 9 9388 9582</span>
+        </div>
+        <div class="contact-info-item">
+          <i class="fas fa-envelope"></i>
+          <span><a href="mailto:mery.rodriguez@amandaspa.cl" style="color:rgba(255,255,255,.8);">mery.rodriguez@amandaspa.cl</a></span>
+        </div>
+        <div class="contact-info-item">
+          <i class="fas fa-clock"></i>
+          <span>Lun – Sab: 8:00 – 18:00</span>
+        </div>
+      </div>
+      <div>
+        <h4 class="contact-col-title">Desde Cualquier Lugar</h4>
+        <img src="img/world-dot-map-white-320x156.png" alt="Mapa mundial" class="contact-map-img">
+        <p style="color:rgba(255,255,255,.6); font-size:13px; margin-top:12px;">Atendemos a clientes de todo Chile, con despacho a faenas mineras y proyectos industriales en todo el territorio nacional.</p>
+      </div>
+      <div>
+        <h4 class="contact-col-title">Sigue Nuestras Actividades</h4>
+        <p style="color:rgba(255,255,255,.6); font-size:14px; margin-bottom:20px;">Mantente informado de nuestras novedades y productos a través de nuestras redes sociales.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/Amanda-spa-230782601161274" target="_blank" rel="noopener" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/amanda_insumos_mineros/" target="_blank" rel="noopener" title="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="mailto:mery.rodriguez@amandaspa.cl" title="Email"><i class="fas fa-envelope"></i></a>
+          <a href="https://wa.me/56993889582" target="_blank" rel="noopener" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <div style="margin-top:28px;">
+          <a href="mailto:mery.rodriguez@amandaspa.cl" class="btn btn-yellow">Enviar mensaje</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <p>&copy; <span id="year"></span> Amanda SPA – Todos los derechos reservados</p>
+  </div>
+</footer>
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" aria-label="Volver arriba"><i class="fas fa-chevron-up"></i></button>
+
+<script>
+  // Year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Hamburger
+  const hamburger = document.getElementById('hamburgerBtn');
+  const nav = document.getElementById('mainNav');
+  hamburger.addEventListener('click', () => nav.classList.toggle('open'));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        nav.classList.remove('open');
+      }
+    });
+  });
+
+  // Scroll to top
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Testimonials slider
+  (function() {
+    const track = document.getElementById('testimonialsTrack');
+    const cards = track.querySelectorAll('.testimonial-card');
+    const controls = document.getElementById('sliderControls');
+    let current = 0;
+    const total = Math.ceil(cards.length / 2);
+
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goTo(i));
+      controls.appendChild(dot);
+    }
+
+    function goTo(index) {
+      current = index;
+      const cardWidth = cards[0].offsetWidth + 30;
+      track.style.transform = `translateX(-${index * cardWidth * 2}px)`;
+      controls.querySelectorAll('.slider-dot').forEach((d, i) => d.classList.toggle('active', i === index));
+    }
+
+    // Auto-play
+    setInterval(() => goTo((current + 1) % total), 5000);
+
+    // Recalc on resize
+    window.addEventListener('resize', () => goTo(current));
+  })();
+
+  // Intersection Observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card, .service-item, .project-item, .testimonial-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(30px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
